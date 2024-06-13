@@ -1,3 +1,30 @@
+import subprocess
+import sys
+import os
+
+# Define the path to the requirements.txt file
+requirements_path = 'requirements.txt'
+
+# Check if requirements.txt file exists
+if not os.path.isfile(requirements_path):
+    print(f"{requirements_path} does not exist. Please provide a valid file.")
+    sys.exit(1)
+
+# Function to install packages from requirements.txt
+def install_requirements(file_path):
+    try:
+        # Use subprocess to run the pip install command
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", file_path])
+        print("All packages installed successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while installing packages: {e}")
+        sys.exit(1)
+
+# Install the packages from requirements.txt
+install_requirements(requirements_path)
+
+
+
 import streamlit as st
 import tensorflow as tf
 import pandas as pd
